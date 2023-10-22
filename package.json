@@ -1,0 +1,20 @@
+{
+  "name": "xgame",
+  "version": "0.0.0",
+  "description": "This is a game engine for 2d games made with javascript.",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Can Temizyurek",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  }
+}
