@@ -3,6 +3,7 @@ import Vertex2D from '../geometry/Vertex2D'
 import { Drawable } from '../canvas/Canvas'
 import Collisional from '../collusion/Collisional'
 import Engine from '../engine/Engine'
+import { CollisionDirection } from '../collusion/CollisionDetector'
 
 /**
  * The abstract Node class represents a node in a game or application.
@@ -52,7 +53,7 @@ export default abstract class Node implements Drawable, Collisional {
    * Handles collision events on the node.
    * @param target - The collisional target.
    */
-  abstract onCollide(target: Collisional): void
+  abstract onCollide(target: Collisional, direction: CollisionDirection): void
 
   /**
    * Returns the bounding vertices of the node.

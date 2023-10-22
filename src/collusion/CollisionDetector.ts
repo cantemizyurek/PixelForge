@@ -8,6 +8,14 @@ interface Box {
   yMax: number
 }
 
+export enum CollisionDirection {
+  TOP = 'TOP',
+  RIGHT = 'RIGHT',
+  BOTTOM = 'BOTTOM',
+  LEFT = 'LEFT',
+  NONE = 'NONE',
+}
+
 /**
  * Detects collisions between collisional objects.
  */
@@ -21,10 +29,41 @@ export default class CollisionDetector {
       // eslint-disable-next-line max-nested-callbacks
       nodes.forEach(node2 => {
         if (node1 !== node2 && this.isColliding(node1, node2)) {
-          node1.onCollide(node2)
+          node1.onCollide(node2, this.getCollisionDirection(node1, node2))
         }
       })
     })
+  }
+
+  private getCollisionDirection(
+    node1: Collisional,
+    node2: Collisional
+  ): CollisionDirection {
+    const box1 = this.getBox(node1)
+    const box2 = this.getBox(node2)
+
+    const xOverlap = this.checkXCollision(box1, box2)
+    const yOverlap = this.checkYCollision(box1, box2)
+
+    if (xOverlap && yOverlap) {
+      const dx = box1.xMin - box2.xMin
+      const dy = box1.yMin - box2.yMin
+
+      return this.calculateCollisionDirection(dx, dy)
+    }
+
+    return CollisionDirection.NONE
+  }
+
+  private calculateCollisionDirection(
+    dx: number,
+    dy: number
+  ): CollisionDirection {
+    if (Math.abs(dx) > Math.abs(dy)) {
+      return dx < 0 ? CollisionDirection.LEFT : CollisionDirection.RIGHT
+    } else {
+      return dy < 0 ? CollisionDirection.TOP : CollisionDirection.BOTTOM
+    }
   }
 
   /**
