@@ -1,8 +1,8 @@
 {
-  "name": "xgame",
+  "name": "xEngine",
   "version": "0.0.0",
   "description": "This is a game engine for 2d games made with javascript.",
-  "main": "build/index.js",
+  "main": "build",
   "scripts": {
     "test": "vitest",
     "build": "tsc"
